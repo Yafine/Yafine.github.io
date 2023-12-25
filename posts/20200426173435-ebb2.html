@@ -1,0 +1,466 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"><title>Hexo博客订阅文章通知功能 | 过客~励む</title><meta name="keywords" content="Hexo,Web Push Notification,浏览器推送文章,新文章推送功能,博客文章订阅"><meta name="author" content="Yafine"><meta name="copyright" content="Yafine"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#f7f9fe"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-touch-fullscreen" content="yes"><meta name="apple-mobile-web-app-title" content="Hexo博客订阅文章通知功能"><meta name="application-name" content="Hexo博客订阅文章通知功能"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="#f7f9fe"><meta property="og:type" content="article"><meta property="og:title" content="Hexo博客订阅文章通知功能"><meta property="og:url" content="https://yafine.github.io/posts/20200426173435-ebb2.html"><meta property="og:site_name" content="过客~励む"><meta property="og:description" content="使用插件实现博客文章订阅并使用浏览器进行新文章推送的通知"><meta property="og:locale" content="zh-CN"><meta property="og:image" content="https://gcore.jsdelivr.net/gh/Yafine/cdn@3.5.0/images/0024.png"><meta property="article:author" content="Yafine"><meta property="article:tag" content="[&quot;HTML&quot;,&quot;CSS&quot;,&quot;JavaScript&quot;,&quot;JQuery&quot;,&quot;React&quot;,&quot;Vue.js&quot;,&quot;YangAir&quot;,&quot;Yafine&quot;,&quot;blog&quot;,&quot;个人博客&quot;,&quot;程序员&quot;,&quot;前端等&quot;]"><meta name="twitter:card" content="summary"><meta name="twitter:image" content="https://gcore.jsdelivr.net/gh/Yafine/cdn@3.5.0/images/0024.png"><meta name="description" content="使用插件实现博客文章订阅并使用浏览器进行新文章推送的通知"><link rel="shortcut icon" href="https://gcore.jsdelivr.net/gh/Yafine/cdn@3.5.0/source/favicon.ico"><link rel="canonical" href="https://yafine.github.io/posts/20200426173435-ebb2"><link rel="preconnect" href="//cdn.cbd.int"/><meta name="google-site-verification" content="xxx"/><meta name="baidu-site-verification" content="code-xxx"/><meta name="msvalidate.01" content="xxx"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.cbd.int/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.cbd.int/node-snackbar@0.1.16/dist/snackbar.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.cbd.int/@fancyapps/ui@5.0.28/dist/fancybox/fancybox.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://npm.elemecdn.com/anzhiyu-theme-static@1.0.0/swiper/swiper.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  linkPageTop: undefined,
+  peoplecanvas: {"enable":true,"img":"https://upload-bbs.miyoushe.com/upload/2023/09/03/125766904/ee23df8517f3c3e3efc4145658269c06_5714860933110284659.png"},
+  postHeadAiDescription: {"enable":true,"gptName":"AnZhiYu","mode":"local","switchBtn":false,"btnLink":"https://afdian.net/item/886a79d4db6711eda42a52540025c377","randomNum":3,"basicWordCount":1000,"key":"xxxx","Referer":"https://xx.xx/"},
+  diytitle: {"enable":true,"leaveTitle":"w(ﾟДﾟ)w 不要走！再看看嘛！","backTitle":"♪(^∇^*)欢迎肥来！"},
+  LA51: undefined,
+  greetingBox: undefined,
+  twikooEnvId: '',
+  commentBarrageConfig:undefined,
+  root: '/',
+  preloader: {"source":3},
+  friends_vue_info: undefined,
+  navMusic: false,
+  mainTone: undefined,
+  authorStatus: {"skills":["🏃 脚踏实地行动派"]},
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":true,"languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"简","rightMenuMsgToTraditionalChinese":"转为繁体","rightMenuMsgToSimplifiedChinese":"转为简体"},
+  noticeOutdate: {"limitDay":365,"position":"top","messagePrev":"It has been","messageNext":"days since the last update, the content of the article may be outdated."},
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":330},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    simplehomepage: true,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"copy":true,"copyrightEbable":false,"limitCount":50,"languages":{"author":"作者: Yafine","link":"链接: ","source":"来源: 过客~励む","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。","copySuccess":"复制成功，复制和转载请标注本文地址"}},
+  lightbox: 'fancybox',
+  Snackbar: {"chs_to_cht":"你已切换为繁体","cht_to_chs":"你已切换为简体","day_to_night":"你已切换为深色模式","night_to_day":"你已切换为浅色模式","bgLight":"#3b70fc","bgDark":"#1f1f1f","position":"top-center"},
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.cbd.int/flickr-justified-gallery@2.1.2/dist/fjGallery.min.js',
+      css: 'https://cdn.cbd.int/flickr-justified-gallery@2.1.2/dist/fjGallery.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isAnchor: false,
+  shortcutKey: undefined,
+  autoDarkmode: true
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  configTitle: '过客~励む',
+  title: 'Hexo博客订阅文章通知功能',
+  postAI: '',
+  pageFillDescription: '小课堂知识, Web-push的优势, Web Push Notification 原理, 开始, 首先看下效果图, 安装插件, 官网注册, 设置消息推送格式, 征求用户是否订阅消息, 调整订阅成功后小铃钟按钮的位置以及相关信息, 订阅成功后欢迎致辞, 生成的数据格式, 自动推送普通解决方案, 自动推动特殊实现方案, 数据统计, 结束一直有小伙伴催我要我写教程关于如何实现博客文章订阅的功能并进行推送的功能我接触这个也不久百度一番最终配置成功手动艾特我群里的那些小伙伴教程来了借此机会宣传下我的交流群欢迎各位小伙伴大佬进群坐镇压饭交流阁小课堂知识大家都知道浏览器推送的通知吧类似于这种的这就是浏览器通知推送只有当你同意推送你才会收到类似的消息通知对于个人博客大家是如何订阅的呢我想大家脑子里会马上回答订阅但是有多少读者订阅了博客的又有多少收到更新后来阅读了新文章并不能给出任何统计数据相比于的通知推送订阅对于博客主是静悄悄的那么如何实现新文章的消息推送呢大家可能想到的只有一种方式是邮件订阅读者访问网站的时候输入自己的邮箱当博客更新的时候读者会收到邮件提醒这听起不错至少作者可以很轻易地对读者进行广播但是到底有多少读者会愿意输入自己的邮箱又有多少读者会经常检查自己的邮箱呢邮件列表订阅这种方式我还没有具体了解过可能是通过第三方进行订阅吧个人博客消息推送的渠道很少能访问到你的博客的都是有缘之人然而一篇新的博客发布了又有多少有缘人会知道呢这些曾经访问过你的博客的人还会再次来访么给予了网站与用户交流的能力虽然无法达到原生那样但也解决了前两种方式的问题的优势与传统的邮件列表相比有这样几点不同使用邮件推送只有打开邮件的人才能看到推送的内容如果使用任何一个在使用浏览器的人都会看到推送的内容由于阅读信息的比例高点击通知的比例也会更高更多的人会跳转到你的站点曾看到过百分之五十的点击率还是一个较新的技术浏览器通知的信噪比没有邮件那么高从用户体验上来说相较于传统的弹出式邮件输入框更加的便捷用户不需要输入一长串的邮箱字符只需要按一下便可以接收之后的更新并且一般弹出式的邮件输入框会降低谷歌的搜索排名传统的邮件列表的转换率为然而的转换率有或许因为大家对垃圾邮件都很讨厌但是浏览器通知推送相对较新还没有成为垃圾信息的象征相较于潜在的垃圾邮件大家更愿意接受一些新颖的科技原理其实分为两块一个是推送另一个是通知推送就是服务器向浏览器发送信息通知则是浏览器显示信息的一种方式通过调用网站可以向用户发送通知但是不管发送什么通知第一步是申请权限只有用户给予网站通知权限网站才可以展示通知通知的样式为系统通知样式往往具有一个头像标题正文以及两个按钮推送的过程可以参照下图图中的是网站是独立于网页运行在浏览器后台的脚本为用户端也就是浏览器为业务服务器决定着推送的内容和什么时候触发则是推送服务当将准备好的内容发送给后负责将内容分发给所有订阅这个网站的用户从时序上来说网站首先获取客户端的推送的权限接着网站会注册一个用来接收推送信息是运行在浏览器客户端后台的脚本这样即使网站被关闭用户照样可以收到来自网站的消息网站注册了推送用的后客户端会返回包含了推送消息所需要的一切数据当业务服务器想要推送消息时它便去调用会通过向客户端推送消息需要注意的是不同的浏览器会使用不同的参考开始首先看下效果图支持的浏览器有谷歌浏览器火狐浏览器浏览器浏览器浏览器等如果想在浏览器中进行通知需要苹果开发者账号效果图大概就是下面这些可能不全当时忘记截图了知道大概的效果就可以了谷歌浏览器手机版浏览器手机版浏览器手机版火狐浏览器手机版电脑版通知订阅成功通知新文章推送通知类似于这种格式的吧加载更多发布新文章并推送给用户的截图我找不到了你们根据教程配置成功后然后再发布新文章就会看到新文章通知的效果了安装插件插件的仓库在你的博客站点目录执行下面的命令如果你安装了或者等可执行下面的命令安装依赖包的速度更快安装的执行这个命令安装的执行这个命令紧接着再你的博客站点目录下的配置文件而不是主题配置文件添加以下配置其中和的值在官网注册得到官网注册点击右边的图标即可进入注册完之后然后会让你重新登录登录之后然后填写相关的信息即可友情提醒注册完账号后需要登录这个网站在登录时需要进行人机身份验证这个需要使用一定的手段才能显示出来我提供一个插件永久破解版的传送门然后放在浏览器的扩展中在强制刷新网站就可以显示出来了填写图中所显示的相关网站信息填写完之后点击下一步纠正图中的我的一个错误全站不是的不需要勾选当你输入链接的网址它会显示如下图的情况会给你分配一个的域名因为仅支持的网站不支持的网站根据网站类型并根据网站指引进行操作以为例不再讲解这里要更正一点我所说的地方图中所指的要下载的文件不需要下载到博客根目录因为在部署到代码托管平台时会自动生成其中将第二步中所指的代码复制粘贴到你的或者因为主题的不同所以代码添加的位置不同简单的说就是放在网站的标签之前根据你的主题而言自己添加其中上图步骤二中的代码有的值如下图中所标明的一长串字母第三步验证安装安装成功后进入主界面然后按照下图中的引导找到和的值并填写到博客根目录的配置文件所对应的位置到这里基本上已经安装完成了下面就是设置弹出框征求用户是否订阅博客订阅博客时的欢迎致辞以及订阅博客之后新文章推送通知设置消息推送格式征求用户是否订阅消息自己可以设置文字的颜色最后点击按钮即可完成设置意思是如果用户第一次选择取消订阅博客后经过多长时间当用户再次打开网站进行推送征求用户是否订阅博客调整订阅成功后小铃钟按钮的位置以及相关信息这里我不在过多的讲解了相信大家根据右边的预览图可以理解左边的值的意思订阅成功后欢迎致辞生成的数据格式建议搭建文章链接使用永久链接具体安装方法请看我的另一篇博文文章生成永久链接每次进行推送部署会生成一个格式里面的内容大概是这样博客订阅文章通知功能一直有小伙伴催我要我写教程关于如何实现博客文章订阅的功能并进行推送的功能我接触这个也不久百度一番最终配置成功手动艾特我群里的那些小伙伴教程来了博客那么问题来了如何获取文章的各个的属性值呢自动推送普通解决方案请看下面的文章格式博客订阅文章通知功能博客浏览器推送文章新文章推送功能博客文章订阅使用插件实现博客文章订阅并使用浏览器进行新文章推送的通知一直有小伙伴催我要我写教程关于如何实现博客文章订阅的功能并进行推送的功能我接触这个也不久百度一番最终配置成功手动艾特我群里的那些小伙伴教程来了这个就是文章的格式其中中属性获取的则是和之间的文本内容基本上适用于大部分主题自动推动特殊实现方案以主题来说文章格式大概是这样博客搭建之主题安装配置篇主题的下载安装以及一些简单的配置博客主题下载安装配置那么中获取的则是文章头部所写的的的内容数据统计这个是我之前的数据统计还算不错吧结束我对于这个的了解大致就是这么多不知道对小伙伴是否有帮助如果教程有错或者你对这个了解的更多有更好的建议我们或许可以交流以下也可以在评论区留言让这个教程更详细更准确',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2023-07-02 11:00:21',
+  postMainColor: '',
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#18171d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#f7f9fe')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+          const isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches
+          const isNotSpecified = window.matchMedia('(prefers-color-scheme: no-preference)').matches
+          const hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+
+          if (t === undefined) {
+            if (isLightMode) activateLightMode()
+            else if (isDarkMode) activateDarkMode()
+            else if (isNotSpecified || hasNoSupport) {
+              const now = new Date()
+              const hour = now.getHours()
+              const isNight = hour <= 6 || hour >= 18
+              isNight ? activateDarkMode() : activateLightMode()
+            }
+            window.matchMedia('(prefers-color-scheme: dark)').addListener(e => {
+              if (saveToLocal.get('theme') === undefined) {
+                e.matches ? activateDarkMode() : activateLightMode()
+              }
+            })
+          } else if (t === 'light') activateLightMode()
+          else activateDarkMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.3.0"></head><body data-type="anzhiyu"><div id="web_bg"></div><div id="an_music_bg"></div><div id="loading-box" onclick="document.getElementById(&quot;loading-box&quot;).classList.add(&quot;loaded&quot;)"><div class="loading-bg"><img class="loading-img nolazyload" alt="加载头像" src="https://gcore.jsdelivr.net/gh/Yafine/img-repo/images/avatar1.png"/><div class="loading-image-dot"></div></div></div><script>const preloader = {
+  endLoading: () => {
+    document.getElementById('loading-box').classList.add("loaded");
+  },
+  initLoading: () => {
+    document.getElementById('loading-box').classList.remove("loaded")
+  }
+}
+window.addEventListener('load',()=> { preloader.endLoading() })
+setTimeout(function(){preloader.endLoading();},10000)
+
+if (true) {
+  document.addEventListener('pjax:send', () => { preloader.initLoading() })
+  document.addEventListener('pjax:complete', () => { preloader.endLoading() })
+}</script><link rel="stylesheet" href="https://cdn.cbd.int/anzhiyu-theme-static@1.1.10/progress_bar/progress_bar.css"/><script async="async" src="https://cdn.cbd.int/pace-js@1.2.4/pace.min.js" data-pace-options="{ &quot;restartOnRequestAfter&quot;:false,&quot;eventLag&quot;:false}"></script><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><div id="nav-group"><span id="blog_name"><a id="site-name" href="/" accesskey="h"><div class="title">过客~励む</div><i class="anzhiyufont anzhiyu-icon-house-chimney"></i></a></span><div class="mask-name-container"><div id="name-container"><a id="page-name" href="javascript:anzhiyu.scrollToDest(0, 500)">PAGE_NAME</a></div></div><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 文章</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/archives/"><i class="anzhiyufont anzhiyu-icon-box-archive faa-tada" style="font-size: 0.9em;"></i><span> 隧道</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/categories/"><i class="anzhiyufont anzhiyu-icon-shapes faa-tada" style="font-size: 0.9em;"></i><span> 分类</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/tags/"><i class="anzhiyufont anzhiyu-icon-tags faa-tada" style="font-size: 0.9em;"></i><span> 标签</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 关于</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/about/"><svg class="icon faa-tada" aria-hidden="true"><use xlink:href="#icon--cool"></use></svg><span> 关于本人</span></a></li><li><a class="site-page child faa-parent animated-hover" href="javascript:toRandomPost()"><i class="anzhiyufont anzhiyu-icon-shoe-prints1 faa-tada" style="font-size: 0.9em;"></i><span> 随便逛逛</span></a></li></ul></div></div></div><div id="nav-right"><div class="nav-button" id="randomPost_button"><a class="site-page" onclick="toRandomPost()" title="随机前往一个文章" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-dice"></i></a></div><div class="nav-button" id="search-button"><a class="site-page social-icon search" href="javascript:void(0);" title="搜索🔍" accesskey="s"><i class="anzhiyufont anzhiyu-icon-magnifying-glass"></i><span> 搜索</span></a></div><input id="center-console" type="checkbox"/><label class="widget" for="center-console" title="中控台" onclick="anzhiyu.switchConsole();"><i class="left"></i><i class="widget center"></i><i class="widget right"></i></label><div id="console"><div class="console-card-group-reward"><ul class="reward-all console-card"><li class="reward-item"><a href="https://gcore.jsdelivr.net/gh/Yafine/cdn@3.5.0/social/wechatpay.png" target="_blank"><img class="post-qr-code-img" alt="wechat" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://gcore.jsdelivr.net/gh/Yafine/cdn@3.5.0/social/wechatpay.png"/></a><div class="post-qr-code-desc">wechat</div></li><li class="reward-item"><a href="https://gcore.jsdelivr.net/gh/Yafine/cdn@3.5.0/social/alipay.png" target="_blank"><img class="post-qr-code-img" alt="alipay" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://gcore.jsdelivr.net/gh/Yafine/cdn@3.5.0/social/alipay.png"/></a><div class="post-qr-code-desc">alipay</div></li></ul></div><div class="console-card-group"><div class="console-card-group-left"><div class="console-card" id="card-newest-comments"><div class="card-content"><div class="author-content-item-tips">互动</div><span class="author-content-item-title"> 最新评论</span></div><div class="aside-list"><span>正在加载中...</span></div></div></div><div class="console-card-group-right"><div class="console-card tags"><div class="card-content"><div class="author-content-item-tips">兴趣点</div><span class="author-content-item-title">寻找你感兴趣的领域</span><div class="card-tags"><div class="item-headline"></div><div class="card-tag-cloud"><a href="/tags/CSS3/" style="font-size: 1.05rem;">CSS3<sup>1</sup></a><a href="/tags/HTML/" style="font-size: 1.05rem;">HTML<sup>1</sup></a><a href="/tags/Hexo/" style="font-size: 1.05rem;">Hexo<sup>23</sup></a><a href="/tags/JavaScript/" style="font-size: 1.05rem;">JavaScript<sup>2</sup></a><a href="/tags/PWA/" style="font-size: 1.05rem;">PWA<sup>1</sup></a><a href="/tags/cdn/" style="font-size: 1.05rem;">cdn<sup>1</sup></a><a href="/tags/jsdelivr/" style="font-size: 1.05rem;">jsdelivr<sup>1</sup></a><a href="/tags/matery%E4%B8%BB%E9%A2%98/" style="font-size: 1.05rem;">matery主题<sup>10</sup></a><a href="/tags/nodejs/" style="font-size: 1.05rem;">nodejs<sup>1</sup></a><a href="/tags/%E5%9B%BE%E5%BA%8A%E6%90%AD%E5%BB%BA/" style="font-size: 1.05rem;">图床搭建<sup>3</sup></a><a href="/tags/%E5%B7%A5%E5%85%B7/" style="font-size: 1.05rem;">工具<sup>1</sup></a><a href="/tags/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/" style="font-size: 1.05rem;">开发工具<sup>1</sup></a><a href="/tags/%E6%8A%80%E5%B7%A7/" style="font-size: 1.05rem;">技巧<sup>2</sup></a><a href="/tags/%E6%95%88%E7%8E%87%E5%B7%A5%E5%85%B7/" style="font-size: 1.05rem;">效率工具<sup>1</sup></a><a href="/tags/%E6%B5%8F%E8%A7%88%E5%99%A8%E7%9F%A5%E8%AF%86/" style="font-size: 1.05rem;">浏览器知识<sup>1</sup></a></div></div><hr/></div></div><div class="console-card history"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-box-archiv"></i><span>文章</span></div><div class="card-archives"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-archive"></i><span>归档</span><a class="card-more-btn" href="/archives/" title="查看更多">
+    <i class="anzhiyufont anzhiyu-icon-angle-right"></i></a></div><ul class="card-archive-list"><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2020/09/"><span class="card-archive-list-date">九月 2020</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">1</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2020/07/"><span class="card-archive-list-date">七月 2020</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">1</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2020/05/"><span class="card-archive-list-date">五月 2020</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">1</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2020/04/"><span class="card-archive-list-date">四月 2020</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">4</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2020/03/"><span class="card-archive-list-date">三月 2020</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">10</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2020/02/"><span class="card-archive-list-date">二月 2020</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">7</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2020/01/"><span class="card-archive-list-date">一月 2020</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">1</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2019/11/"><span class="card-archive-list-date">十一月 2019</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">6</span><span>篇</span></div></a></li></ul></div><hr/></div></div></div><div class="button-group"><div class="console-btn-item"><a class="darkmode_switchbutton" title="显示模式切换" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-moon"></i></a></div><div class="console-btn-item" id="consoleHideAside" onclick="anzhiyu.hideAsideBtn()" title="边栏显示控制"><a class="asideSwitch"><i class="anzhiyufont anzhiyu-icon-arrows-left-right"></i></a></div></div><div class="console-mask" onclick="anzhiyu.hideConsole()" href="javascript:void(0);"></div></div><div class="nav-button" id="nav-totop"><a class="totopbtn" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i><span id="percent" onclick="anzhiyu.scrollToDest(0,500)">0</span></a></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);" title="切换"><i class="anzhiyufont anzhiyu-icon-bars"></i></a></div></div></div></nav><div id="post-info"><div id="post-firstinfo"><div class="meta-firstline"><a class="post-meta-original">原创</a><span class="post-meta-categories"><span class="post-meta-separator"></span><i class="anzhiyufont anzhiyu-icon-inbox post-meta-icon"></i><a class="post-meta-categories" href="/categories/Hexo%E5%8D%9A%E5%AE%A2/" itemprop="url">Hexo博客</a></span><span class="article-meta tags"><a class="article-meta__tags" href="/tags/Hexo/" tabindex="-1" itemprop="url"> <span> <i class="anzhiyufont anzhiyu-icon-hashtag"></i>Hexo</span></a></span></div></div><h1 class="post-title" itemprop="name headline">Hexo博客订阅文章通知功能</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="anzhiyufont anzhiyu-icon-calendar-days post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" itemprop="dateCreated datePublished" datetime="2020-04-26T09:34:35.000Z" title="发表于 2020-04-26 17:34:35">2020-04-26</time><span class="post-meta-separator"></span><i class="anzhiyufont anzhiyu-icon-history post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" itemprop="dateCreated datePublished" datetime="2023-07-02T03:00:21.208Z" title="更新于 2023-07-02 11:00:21">2023-07-02</time></span></div><div class="meta-secondline"><span class="post-meta-separator"></span><span class="post-meta-wordcount"><i class="anzhiyufont anzhiyu-icon-file-word post-meta-icon" title="文章字数"></i><span class="post-meta-label" title="文章字数">字数总计:</span><span class="word-count" title="文章字数">3.1k</span><span class="post-meta-separator"></span><i class="anzhiyufont anzhiyu-icon-clock post-meta-icon" title="阅读时长"></i><span class="post-meta-label" title="阅读时长">阅读时长:</span><span>10分钟</span></span><span class="post-meta-separator">       </span><span class="post-meta-position" title="作者IP属地为河南"><i class="anzhiyufont anzhiyu-icon-location-dot"></i>河南</span></div></div></div><section class="main-hero-waves-area waves-area"><svg class="waves-svg" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto"><defs><path id="gentle-wave" d="M -160 44 c 30 0 58 -18 88 -18 s 58 18 88 18 s 58 -18 88 -18 s 58 18 88 18 v 44 h -352 Z"></path></defs><g class="parallax"><use href="#gentle-wave" x="48" y="0"></use><use href="#gentle-wave" x="48" y="3"></use><use href="#gentle-wave" x="48" y="5"></use><use href="#gentle-wave" x="48" y="7"></use></g></svg></section><div id="post-top-cover"><img class="nolazyload" id="post-top-bg" src="https://gcore.jsdelivr.net/gh/Yafine/cdn@3.5.0/images/0024.png"></div></header><main id="blog-container"><div class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container" itemscope itemtype="https://yafine.github.io/posts/20200426173435-ebb2.html"><header><a class="post-meta-categories" href="/categories/Hexo%E5%8D%9A%E5%AE%A2/" itemprop="url">Hexo博客</a><a href="/tags/Hexo/" tabindex="-1" itemprop="url">Hexo</a><h1 id="CrawlerTitle" itemprop="name headline">Hexo博客订阅文章通知功能</h1><span itemprop="author" itemscope itemtype="http://schema.org/Person">Yafine</span><time itemprop="dateCreated datePublished" datetime="2020-04-26T09:34:35.000Z" title="发表于 2020-04-26 17:34:35">2020-04-26</time><time itemprop="dateCreated datePublished" datetime="2023-07-02T03:00:21.208Z" title="更新于 2023-07-02 11:00:21">2023-07-02</time></header><div class="note info flat"><p>一直有小伙伴催我要我写教程，关于如何实现博客文章订阅的功能，并进行推送的功能，我接触这个也不久，百度一番，最终配置成功。手动艾特我群里的那些小伙伴，教程来了😂，</p>
+</div>
+<hr>
+<div class="note info flat"><p>借此机会宣传下我的交流群，欢迎各位小伙伴，大佬进群坐镇！😉😉😉<a class="btn-anzhiyu purple larger" target="_blank" rel="noopener" href="//shang.qq.com/wpa/qunwpa?idkey=254219eb681efda8c7643ed89adf1cffb8a9e5dcf55f91a5c950d012facd21ef" 
+  title="压饭交流阁"><i class="far fa-hand-point-right"></i><span>压饭交流阁</span></a></p>
+</div>
+
+<h3 id="小课堂知识"><a href="#小课堂知识" class="headerlink" title="小课堂知识"></a>小课堂知识</h3><p>大家都知道浏览器推送的通知吧，类似于这种的，这就是浏览器通知推送，只有当你同意推送，你才会收到类似的消息通知！</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://gcore.jsdelivr.net/gh/Yafine/img-repo/images/20200426203931.png"></p>
+<p>对于个人博客，大家是如何订阅的呢？我想大家脑子里会马上回答👉<code>RSS订阅</code>。但是有多少读者订阅了博客的 <code>RSS</code>，又有多少收到 <code>RSS</code> 更新后来阅读了新文章，<code>RSS</code> 并不能给出任何统计数据。相比于 <code>App</code> 的通知推送，<code>RSS</code> 订阅对于博客主是静悄悄的。</p>
+<p>那么如何实现新文章的消息推送呢？大家可能想到的只有一种方式是邮件订阅，读者访问网站的时候，输入自己的邮箱。当博客更新的时候，读者会收到邮件提醒。这听起不错，至少作者可以很轻易地对读者进行广播。但是到底有多少读者会愿意输入自己的邮箱，又有多少读者会经常检查自己的邮箱呢？邮件列表订阅这种方式我还没有具体了解过，可能是通过第三方进行订阅吧。</p>
+<p>个人博客消息推送的渠道很少，能访问到你的博客的都是有缘之人。然而一篇新的博客发布了，又有多少有缘人会知道呢？这些曾经访问过你的博客的人还会再次来访么？</p>
+<p>Web Push Notification 给予了网站与用户交流的能力。虽然无法达到原生 app 那样，但也解决了前两种方式的问题。</p>
+<h4 id="Web-push的优势"><a href="#Web-push的优势" class="headerlink" title="Web-push的优势"></a>Web-push的优势</h4><p>与传统的邮件列表相比，Web push Notification 有这样几点不同：</p>
+<ol>
+<li>使用邮件推送，只有打开邮件的人才能看到推送的内容。如果使用 Web push Notification，任何一个在使用浏览器的人都会看到推送的内容。</li>
+<li>由于阅读信息的比例高，点击通知的比例也会更高。更多的人会跳转到你的站点。PushEngage 曾看到过百分之五十的点击率。</li>
+<li>Web push notification 还是一个较新的技术。浏览器通知的信噪比没有邮件那么高。</li>
+</ol>
+<p>从用户体验上来说，相较于传统的弹出式邮件输入框，Web-push Notification 更加的便捷。用户不需要输入一长串的邮箱字符，只需要按一下便可以接收之后的更新。并且一般弹出式的邮件输入框会降低谷歌的搜索排名。</p>
+<p>传统的邮件列表的转换率为 1%-4%,然而 Web push notification 的转换率有 30%。或许因为大家对垃圾邮件都很讨厌，但是浏览器通知推送相对较新，还没有成为垃圾信息的象征。相较于潜在的垃圾邮件，大家更愿意接受一些新颖的科技。</p>
+<h4 id="Web-Push-Notification-原理"><a href="#Web-Push-Notification-原理" class="headerlink" title="Web Push Notification 原理"></a>Web Push Notification 原理</h4><p>Web Push Notification 其实分为两块。一个是推送，另一个是通知。</p>
+<p><strong>推送</strong>就是服务器向浏览器发送信息。<strong>通知</strong>则是浏览器显示信息的一种方式。</p>
+<p>通过调用 NotificationAPI,网站可以向用户发送通知。但是不管发送什么通知，第一步是申请权限。只有用户给予网站通知权限，网站才可以展示通知。通知的样式为系统通知样式。往往具有一个头像，标题，正文以及两个按钮。</p>
+<p><strong>推送</strong>的过程可以参照下图。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://gcore.jsdelivr.net/gh/Yafine/img-repo/images/20200426205507.png" alt="Web-push推送原理图"></p>
+<p>图中的 web page 是网站。Service worker 是独立于网页，运行在浏览器后台的脚本。Use agent 为用户端，也就是浏览器。 Application server 为业务服务器，决定着推送的内容和什么时候触发 Push service。Push service 则是推送服务。当 Application server 将准备好的内容发送给 Push service 后，push service 负责将内容分发给所有订阅这个网站的用户。</p>
+<p>从时序上来说，网站首先获取客户端的推送的权限。接着网站会注册一个 service worker 用来接收推送信息。Service worker 是运行在浏览器（客户端）后台的脚本。这样即使网站被关闭，用户照样可以收到来自网站的消息。网站注册了推送用的 Service worker 后，客户端会返回<code>PushSubscription</code>。<code>PushSubscription</code>包含了推送消息所需要的一切数据。</p>
+<p>当业务服务器想要推送消息时，它便去调用 Push service。Push service 会通过<code>Web Push Protocol</code>向客户端推送消息。</p>
+<p>需要注意的是不同的浏览器会使用不同的 Push service。</p>
+<div class="note default flat"><p>参考：<a target="_blank" rel="noopener" href="https://www.inevitable.tech/posts/98ae9e55/">https://www.inevitable.tech/posts/98ae9e55/</a> </p>
+</div>
+
+<h3 id="开始"><a href="#开始" class="headerlink" title="开始"></a>开始</h3><h3 id="首先看下效果图"><a href="#首先看下效果图" class="headerlink" title="首先看下效果图"></a>首先看下效果图</h3><div class="note warning flat"><p>支持的浏览器有谷歌浏览器、火狐浏览器、Opera浏览器、Microsoft Edge浏览器、Safari浏览器等，如果想在Safari浏览器<br>中进行通知，需要苹果开发者账号</p>
+</div>
+
+<div class="note info flat"><p>效果图大概就是下面这些，可能不全，当时忘记截图了，知道大概的效果就可以了</p>
+</div>
+
+<div class="gallery">
+  <div class="fj-gallery page_img_lazyload  data" data-rowHeight="220" data-limit="10">
+    <span class="gallery-data">[{"url":"https://gcore.jsdelivr.net/gh/Yafine/img-repo/images/mwebpush1.jpg","alt":"谷歌浏览器手机版"},{"url":"https://gcore.jsdelivr.net/gh/Yafine/img-repo/images/mwebpush2.jpg","alt":"opera浏览器手机版"},{"url":"https://gcore.jsdelivr.net/gh/Yafine/img-repo/images/mwebpush3.jpg","alt":"Microsoft Edge浏览器手机版"},{"url":"https://gcore.jsdelivr.net/gh/Yafine/img-repo/images/mwebpush5.jpg","alt":"火狐浏览器手机版"},{"url":"https://gcore.jsdelivr.net/gh/Yafine/img-repo/images/2020-04-06_22-21-20.png","alt":"电脑版通知"},{"url":"https://gcore.jsdelivr.net/gh/Yafine/img-repo/images/2020-04-15_09-41-38.png","alt":"订阅成功通知"},{"url":"https://gcore.jsdelivr.net/gh/Yafine/img-repo/images/20200426203111.png","alt":"新文章推送通知，类似于这种格式的吧"}]</span>
+  </div><button class="gallery-load-more" style="opacity:0">
+  <span>加载更多</span>
+  <i class="anzhiyufont anzhiyu-icon-arrow-down"></i>
+  </button></div>
+
+<div class="note default flat"><p>发布新文章并推送给用户的截图，我找不到了，你们根据教程配置成功后，然后再发布新文章，就会看到新文章通知的效果了。</p>
+</div>
+
+<h3 id="安装插件"><a href="#安装插件" class="headerlink" title="安装插件"></a>安装插件</h3><p>插件的GitHub仓库  <a target="_blank" rel="noopener" href="https://github.com/glazec/hexo-web-push-notification"><i class="fab fa-github"></i>hexo-web-push-notification</a></p>
+<p>在你的博客站点目录执行下面的命令：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm i hexo-web-push-notification --save</span><br></pre></td></tr></table></figure>
+
+<p>如果你安装了<code>cnpm</code>或者<code>yarn</code>等可执行下面的命令，安装依赖包的速度更快：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cnpm i hexo-web-push-notification --save <span class="comment">#安装cnpm的执行这个命令</span></span><br><span class="line">yarn add hexo-web-push-notification <span class="comment">#安装yarn的执行这个命令</span></span><br></pre></td></tr></table></figure>
+
+<p>紧接着再你的博客站点目录下的配置文件，而不是<font color="red">主题配置文件</font>，添加以下配置：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">webPushNotification:</span></span><br><span class="line">  <span class="attr">webpushrKey:</span> <span class="string">&quot;your webpushr rest api key&quot;</span></span><br><span class="line">  <span class="attr">webpushrAuthToken:</span> <span class="string">&quot;your webpushr authorize token&quot;</span></span><br><span class="line">  <span class="attr">trackingCode:</span> <span class="string">&quot;AEGlpbdgvBCWXqXI6PtsUzobY7TLV9gwJU8bzMktrwfrSERg_xnLVbjpCw8x2GmFmi1ZcLTz0ni6OnX5MAwoM88&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>其中<code>webpushrKey</code>,<code>webpushrAuthToken</code>和<code>trackingCode</code>的值在官网注册得到。</p>
+<h3 id="官网注册"><a href="#官网注册" class="headerlink" title="官网注册"></a>官网注册</h3><p>点击右边的图标即可进入👉 ：<a target="_blank" rel="noopener" href="https://app.webpushr.com/signup"  style='font-size:8px;'><i class="fa-solid fa-torii-gate fa-2x"></i></a></p>
+<p>注册完之后，然后会让你重新登录，登录之后，然后填写相关的信息即可。</p>
+<p><font style="font-size: 22px;color:red;">友情提醒：</font>注册完账号后，需要登录这个网站， 在登录时需要进行人机身份验证，这个需要使用一定的手段才能显示出来，我提供一个插件，永久破解版的，传送门<a href=" https://72k.us/file/19365016-441665146"  style='font-size:8px;'><i class="fas fa-torii-gate fa-2x"></i></a>，然后放在浏览器的扩展中，在强制刷新网站就可以显示出来了。😎😎😎</p>
+<ol>
+<li>填写图中所显示的相关网站信息，填写完之后，点击下一步</li>
+</ol>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://gcore.jsdelivr.net/gh/Yafine/img-repo/images/20200426214232.png"></p>
+<div class="note warning flat"><p>纠正图中的我的一个错误，全站不是HTTPS的不需要勾选，当你输入HTTP链接的网址，它会显示如下图的情况，会给你分配一个HTTPS的域名。因为<code>Web push notications</code>仅支持HTTPS的网站，不支持HTTP的网站</p>
+</div>
+
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://gcore.jsdelivr.net/gh/Yafine/img-repo/images/20200426214856.png" alt="Web Push官方说明"></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://gcore.jsdelivr.net/gh/Yafine/img-repo/images/20200426214418.png"></p>
+<ol start="2">
+<li>根据网站类型，并根据网站指引进行操作，以<code>Hexo</code>为例，<code>wordpress</code>不再讲解。</li>
+</ol>
+<div class="note danger flat"><p>这里要更正一点我所说的地方，图中所指的要下载的js文件不需要下载到博客根目录，因为在部署到代码托管平台时会自动生成。</p>
+</div>
+
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://gcore.jsdelivr.net/gh/Yafine/img-repo/images/20200426215411.png"></p>
+<div class="note info flat"><p>其中将第二步中所指的代码复制粘贴到你的<code>footer.ejs</code>或者<code>layout.ejs</code>，<font color="red">因为主题的不同，所以代码添加的位置不同，</font>简单的说，就是放在网站的<code>&lt;/body&gt;</code>标签之前，根据你的主题而言，自己添加。</p>
+</div>
+
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://gcore.jsdelivr.net/gh/Yafine/img-repo/images/20200426215944.png"></p>
+<p>其中，上图步骤二中的代码有<code>trackingCode</code>的值，如下图中所标明的一长串字母。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://gcore.jsdelivr.net/gh/Yafine/img-repo/images/20200426220430.png"></p>
+<ol start="3">
+<li>第三步：验证安装</li>
+</ol>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://gcore.jsdelivr.net/gh/Yafine/img-repo/images/20200426220758.png" alt="安装成功"></p>
+<p>安装成功后，进入主界面，然后按照下图中的引导，找到<code>webpushrKey</code>和<code>webpushrAuthToken</code>的值，并填写到博客根目录的配置文件所对应的位置。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://gcore.jsdelivr.net/gh/Yafine/img-repo/images/20200426221220.png"></p>
+<div class="note info flat"><p>到这里基本上已经安装完成了，下面就是设置弹出框，征求用户是否订阅博客，订阅博客时的欢迎致辞以及订阅博客之后新文章推送通知</p>
+</div>
+
+<h3 id="设置消息推送格式"><a href="#设置消息推送格式" class="headerlink" title="设置消息推送格式"></a>设置消息推送格式</h3><h4 id="征求用户是否订阅消息"><a href="#征求用户是否订阅消息" class="headerlink" title="征求用户是否订阅消息"></a>征求用户是否订阅消息</h4><p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://gcore.jsdelivr.net/gh/Yafine/img-repo/images/20200426224708.png"></p>
+<p>自己可以设置文字的颜色。</p>
+<p>最后点击按钮即可完成设置。</p>
+<div class="note info flat"><p><code>Re-prompt Delay</code>：意思是，如果用户第一次选择取消订阅博客后，经过多长时间，当用户再次打开网站进行推送，征求用户是否订阅博客。</p>
+</div>
+
+<h4 id="调整订阅成功后，小铃钟按钮的位置以及相关信息"><a href="#调整订阅成功后，小铃钟按钮的位置以及相关信息" class="headerlink" title="调整订阅成功后，小铃钟按钮的位置以及相关信息"></a>调整订阅成功后，小铃钟按钮的位置以及相关信息</h4><p>这里我不在过多的讲解了，相信大家根据右边的预览图可以理解左边的值的意思。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://gcore.jsdelivr.net/gh/Yafine/img-repo/images/20200426225449.png"></p>
+<h4 id="订阅成功后欢迎致辞"><a href="#订阅成功后欢迎致辞" class="headerlink" title="订阅成功后欢迎致辞"></a>订阅成功后欢迎致辞</h4><p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://gcore.jsdelivr.net/gh/Yafine/img-repo/images/image-20200426223453904.png"></p>
+<h3 id="生成的数据格式"><a href="#生成的数据格式" class="headerlink" title="生成的数据格式"></a>生成的数据格式</h3><div class="note info flat"><p>建议搭建文章链接使用永久链接，具体安装方法，请看我的另一篇博文：<a target="_blank" rel="noopener" href="https://yafine-blog.cn/posts/12b4.html#%E6%96%87%E7%AB%A0%E7%94%9F%E6%88%90%E6%B0%B8%E4%B9%85%E9%93%BE%E6%8E%A5">文章生成永久链接</a></p>
+</div>
+
+<p>每次进行推送部署，会生成一个<code>newPost.json</code>格式，里面的内容大概是这样</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;title&quot;</span><span class="punctuation">:</span><span class="string">&quot;Hexo博客订阅文章通知功能&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;id&quot;</span><span class="punctuation">:</span><span class="string">&quot;posts/ebb2.html&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;date_published&quot;</span><span class="punctuation">:</span><span class="string">&quot;04/26/2020&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;summary&quot;</span><span class="punctuation">:</span><span class="string">&quot;\n            一直有小伙伴催我要我写教程，关于如何实现博客文章订阅的功能，并进行推送的功能，我接触这个也不久，百度一番，最终配置成功。手动艾特我群里的那些小伙伴，教程来了😂，\n          &quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;url&quot;</span><span class="punctuation">:</span><span class="string">&quot;https://yafine-blog.cn/posts/ebb2.html&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;tags&quot;</span><span class="punctuation">:</span><span class="punctuation">[</span><span class="string">&quot;Hexo&quot;</span><span class="punctuation">]</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;categories&quot;</span><span class="punctuation">:</span><span class="punctuation">[</span><span class="string">&quot;Hexo博客&quot;</span><span class="punctuation">]</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<div class="note info flat"><p>那么问题来了，如何获取文章的各个<code>frot-matter</code>的属性值呢？</p>
+</div>
+
+<h4 id="自动推送普通解决方案"><a href="#自动推送普通解决方案" class="headerlink" title="自动推送普通解决方案"></a>自动推送普通解决方案</h4><p>请看下面的文章格式。</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">---</span><br><span class="line">title: Hexo博客订阅文章通知功能</span><br><span class="line">top<span class="emphasis">_img: </span></span><br><span class="line"><span class="emphasis">copyright: true</span></span><br><span class="line"><span class="emphasis">toc_</span>number: true</span><br><span class="line">categories: Hexo博客</span><br><span class="line">tags: Hexo</span><br><span class="line">keywords: &#x27;Hexo,Web Push Notification,浏览器推送文章,新文章推送功能,博客文章订阅&#x27;</span><br><span class="line">description: 使用插件实现博客文章订阅并使用浏览器进行新文章推送的通知</span><br><span class="line">abbrlink: ebb2</span><br><span class="line">date: 2020-04-26 17:34:35</span><br><span class="line">cover: https://cdn.jsdelivr.net/gh/Yafine/cdn@3.3.5/images/0024.png</span><br><span class="line">comments:</span><br><span class="line">toc:</span><br><span class="line">hide:</span><br><span class="line">katex:</span><br><span class="line"><span class="section">mathjax:</span></span><br><span class="line"><span class="section">---</span></span><br><span class="line"></span><br><span class="line">&#123;% note primary no-icon %&#125; </span><br><span class="line"></span><br><span class="line">一直有小伙伴催我要我写教程，关于如何实现博客文章订阅的功能，并进行推送的功能，我接触这个也不久，百度一番，最终配置成功。手动艾特我群里的那些小伙伴，教程来了😂，</span><br><span class="line"></span><br><span class="line">&#123;% endnote %&#125;</span><br><span class="line">&lt;!-- more --&gt;</span><br><span class="line">.......</span><br><span class="line">.......</span><br></pre></td></tr></table></figure>
+
+<p>这个就是文章的格式，其中<code>newPost.json</code>中<code>summary</code>属性获取的则是<code>---</code>和<code>&lt;!-- more --&gt;</code>之间的文本内容。基本上适用于大部分主题。</p>
+<h4 id="自动推动特殊实现方案"><a href="#自动推动特殊实现方案" class="headerlink" title="自动推动特殊实现方案"></a>自动推动特殊实现方案</h4><p>以<code>hexo-theme-matery</code>主题来说：</p>
+<p>文章格式大概是这样：</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">---</span><br><span class="line">title: Hexo+Github博客搭建之Matery主题安装配置篇</span><br><span class="line">author: YangAir</span><br><span class="line">img: &#x27;https://cdn.jsdelivr.net/gh/Yafine/cdn@3.2.2/images/0022.png&#x27;</span><br><span class="line">top: false</span><br><span class="line">cover: false</span><br><span class="line">toc: true</span><br><span class="line">mathjax: false</span><br><span class="line">reprint: true</span><br><span class="line">summary: Matery主题的下载，安装以及一些简单的配置</span><br><span class="line">categories: Hexo博客</span><br><span class="line">tags: Hexo</span><br><span class="line">keywords: &#x27;matery,hexo-theme-matery,matery主题下载安装配置&#x27;</span><br><span class="line">abbrlink: 5dbf</span><br><span class="line">date: 2020-03-17 09:12:48</span><br><span class="line">coverImg:</span><br><span class="line"><span class="section">password:</span></span><br><span class="line"><span class="section">---</span></span><br></pre></td></tr></table></figure>
+
+<p>那么<code>newPost.json</code>中<code>summary</code>获取的则是文章头部所写的<code>Front-matter</code>的<code>summary</code>的内容。</p>
+<h3 id="数据统计"><a href="#数据统计" class="headerlink" title="数据统计"></a>数据统计</h3><p>这个是我之前的数据统计，还算不错吧😁😁😁</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://gcore.jsdelivr.net/gh/Yafine/img-repo/images/2020-04-26_23-27-37.png"></p>
+<h3 id="结束"><a href="#结束" class="headerlink" title="结束"></a>结束</h3><div class="note info flat"><p>我对于这个<code>Web Push Notifications</code>的了解大致就是这么多，不知道对小伙伴是否有帮助？如果教程有错，或者你对这个<code>Web Push Notifications</code>了解的更多，有更好的建议，我们或许可以交流以下，也可以在评论区留言，让这个教程更详细，更准确😊😊😊</p>
+</div>
+
+</article><div class="post-copyright"><div class="copyright-cc-box"><i class="anzhiyufont anzhiyu-icon-copyright"></i></div><div class="post-copyright__author_box"><a class="post-copyright__author_img" href="/" title="头像"><img class="post-copyright__author_img_back" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://gcore.jsdelivr.net/gh/Yafine/img-repo/images/avatar1.png" title="头像" alt="头像"><img class="post-copyright__author_img_front" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://gcore.jsdelivr.net/gh/Yafine/img-repo/images/avatar1.png" title="头像" alt="头像"></a><div class="post-copyright__author_name">Yafine</div><div class="post-copyright__author_desc">有志者事竟成</div></div><div class="post-copyright__post__info"><a class="post-copyright__original" title="该文章为原创文章，注意版权协议" href="https://yafine.github.io/posts/20200426173435-ebb2.html">原创</a><a class="post-copyright-title"><span onclick="rm.copyPageUrl('https://yafine.github.io/posts/20200426173435-ebb2.html')">Hexo博客订阅文章通知功能</span></a></div><div class="post-tools" id="post-tools"><div class="post-tools-left"><div class="rewardLeftButton"><div class="post-reward" onclick="anzhiyu.addRewardMask()"><div class="reward-button button--animated" title="赞赏作者"><i class="anzhiyufont anzhiyu-icon-hand-heart-fill"></i>打赏作者</div><div class="reward-main"><div class="reward-all"><span class="reward-title">感谢你赐予我前进的力量</span><ul class="reward-group"><li class="reward-item"><a href="https://gcore.jsdelivr.net/gh/Yafine/cdn@3.5.0/social/wechatpay.png" target="_blank"><img class="post-qr-code-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://gcore.jsdelivr.net/gh/Yafine/cdn@3.5.0/social/wechatpay.png" alt="wechat"/></a><div class="post-qr-code-desc">wechat</div></li><li class="reward-item"><a href="https://gcore.jsdelivr.net/gh/Yafine/cdn@3.5.0/social/alipay.png" target="_blank"><img class="post-qr-code-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://gcore.jsdelivr.net/gh/Yafine/cdn@3.5.0/social/alipay.png" alt="alipay"/></a><div class="post-qr-code-desc">alipay</div></li></ul><a class="reward-main-btn" href="/about/#about-reward" target="_blank"><div class="reward-text">赞赏者名单</div><div class="reward-dec">因为你们的支持让我意识到写文章的价值🙏</div></a></div></div></div><div id="quit-box" onclick="anzhiyu.removeRewardMask()" style="display: none"></div></div><div class="shareRight"><div class="share-link mobile"><div class="share-qrcode"><div class="share-button" title="使用手机访问这篇文章"><i class="anzhiyufont anzhiyu-icon-qrcode"></i></div><div class="share-main"><div class="share-main-all"><div id="qrcode" title="https://yafine.github.io/posts/20200426173435-ebb2.html"></div><div class="reward-dec">使用手机访问这篇文章</div></div></div></div></div><div class="share-link weibo"><a class="share-button" target="_blank" href="https://service.weibo.com/share/share.php?title=Hexo博客订阅文章通知功能&amp;url=https://yafine.github.io/posts/20200426173435-ebb2.html&amp;pic=https://gcore.jsdelivr.net/gh/Yafine/cdn@3.5.0/images/0024.png" rel="external nofollow noreferrer noopener"><i class="anzhiyufont anzhiyu-icon-weibo"></i></a></div><script>function copyCurrentPageUrl() {
+  var currentPageUrl = window.location.href;
+  var input = document.createElement("input");
+  input.setAttribute("value", currentPageUrl);
+  document.body.appendChild(input);
+  input.select();
+  input.setSelectionRange(0, 99999);
+  document.execCommand("copy");
+  document.body.removeChild(input);
+}</script><div class="share-link copyurl"><div class="share-button" id="post-share-url" title="复制链接" onclick="copyCurrentPageUrl()"><i class="anzhiyufont anzhiyu-icon-link"></i></div></div></div></div></div><div class="post-copyright__notice"><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://yafine.github.io" target="_blank">过客~励む</a>！</span></div></div><div class="post-tools-right"><div class="tag_share"><div class="post-meta__box"><div class="post-meta__box__tag-list"><a class="post-meta__box__tags" href="/tags/Hexo/"><span class="tags-punctuation"> <i class="anzhiyufont anzhiyu-icon-tag"></i></span>Hexo<span class="tagsPageCount">23</span></a></div></div></div><div class="post_share"><div class="social-share" data-image="https://gcore.jsdelivr.net/gh/Yafine/cdn@3.5.0/images/0033.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.cbd.int/butterfly-extsrc@1.1.3/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"/><script src="https://cdn.cbd.int/butterfly-extsrc@1.1.3/sharejs/dist/js/social-share.min.js" defer="defer"></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/posts/20200426142402-12b4.html"><img class="prev-cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://gcore.jsdelivr.net/gh/Yafine/cdn@3.5.0/images/0001.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">Hexo+Github博客搭建之Matery主题个性化修改篇（二）</div></div></a></div><div class="next-post pull-right"><a href="/posts/20200509105306-e925.html"><img class="next-cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://gcore.jsdelivr.net/gh/Yafine/cdn@3.5.0/images/0061.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">为你的hexo博客添加导航页</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="anzhiyufont anzhiyu-icon-thumbs-up fa-fw" style="font-size: 1.5rem; margin-right: 4px"></i><span>喜欢这篇文章的人也看了</span></div><div class="relatedPosts-list"><div><a href="/posts/20200317173728-8c84.html" title="Hexo+Github博客搭建之Matery主题个性化修改篇（一）"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://gcore.jsdelivr.net/gh/Yafine/cdn@3.5.0/images/0023.png" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2020-03-17</div><div class="title">Hexo+Github博客搭建之Matery主题个性化修改篇（一）</div></div></a></div><div><a href="/posts/20200318162309-fc0.html" title="Hexo+Github博客搭建之博客优化篇"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://gcore.jsdelivr.net/gh/Yafine/cdn@3.5.0/images/0027.png" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2020-03-18</div><div class="title">Hexo+Github博客搭建之博客优化篇</div></div></a></div><div><a href="/posts/20200318163606-a170.html" title="Hexo+Github博客搭建之域名解析与绑定篇"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://gcore.jsdelivr.net/gh/Yafine/cdn@3.5.0/images/0025.png" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2020-03-18</div><div class="title">Hexo+Github博客搭建之域名解析与绑定篇</div></div></a></div><div><a href="/posts/20200426142402-12b4.html" title="Hexo+Github博客搭建之Matery主题个性化修改篇（二）"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://gcore.jsdelivr.net/gh/Yafine/cdn@3.5.0/images/0001.png" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2020-04-26</div><div class="title">Hexo+Github博客搭建之Matery主题个性化修改篇（二）</div></div></a></div><div><a href="/posts/20200317083404-bb7.html" title="Hexo+Github博客搭建之环境准备篇"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://gcore.jsdelivr.net/gh/Yafine/cdn@3.5.0/images/0020.png" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2020-03-17</div><div class="title">Hexo+Github博客搭建之环境准备篇</div></div></a></div><div><a href="/posts/20200317090257-7de0.html" title="Hexo+Github博客搭建之环境搭建篇"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://gcore.jsdelivr.net/gh/Yafine/cdn@3.5.0/images/0021.png" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2020-03-17</div><div class="title">Hexo+Github博客搭建之环境搭建篇</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="card-content"><div class="author-info__sayhi" id="author-info__sayhi" onclick="anzhiyu.changeSayHelloText()"></div><div class="author-info-avatar"><img class="avatar-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://gcore.jsdelivr.net/gh/Yafine/img-repo/images/avatar1.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/><div class="author-status"><img class="g-status" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://bu.dusays.com/2023/08/24/64e6ce9c507bb.png" alt="status"/></div></div><div class="author-info__description">分享生活，分享知识，备用站点：yafine66.gitee.io</div><div class="author-info__bottom-group"><a class="author-info__bottom-group-left" href="/"><h1 class="author-info__name">Yafine</h1><div class="author-info__desc">有志者事竟成</div></a><div class="card-info-social-icons is-center"><a class="social-icon faa-parent animated-hover" href="tencent://Message/?Uin=1035800145&amp;amp;websiteName=local.edu.com:8888=&amp;amp;Menu=yes" target="_blank" title="QQ"><svg class="icon faa-tada" aria-hidden="true"><use xlink:href="#icon-QQ"></use></svg></a><a class="social-icon faa-parent animated-hover" href="https://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&amp;email=1035800145@qq.com" target="_blank" title="Email"><svg class="icon faa-tada" aria-hidden="true"><use xlink:href="#icon-youjian"></use></svg></a><a class="social-icon faa-parent animated-hover" href="https://github.com/Yafine" target="_blank" title="Github"><svg class="icon faa-tada" aria-hidden="true"><use xlink:href="#icon-github"></use></svg></a><a class="social-icon faa-parent animated-hover" href="/atom.xml" target="_blank" title="RSS"><svg class="icon faa-tada" aria-hidden="true"><use xlink:href="#icon-RSS_filled"></use></svg></a></div></div></div></div><div class="card-widget anzhiyu-right-widget" id="card-wechat" onclick="null"><div id="flip-wrapper"><div id="flip-content"><div class="face" style="background: url(https://bu.dusays.com/2023/01/13/63c02edf44033.png) center center / 100% no-repeat"></div><div class="back face" style="background: url(https://gcore.jsdelivr.net/gh/Yafine/cdn@3.5.0/social/WeChat-official-account4.png) center center / 100% no-repeat"></div></div></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-bars"></i><span>文章目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B0%8F%E8%AF%BE%E5%A0%82%E7%9F%A5%E8%AF%86"><span class="toc-text">小课堂知识</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Web-push%E7%9A%84%E4%BC%98%E5%8A%BF"><span class="toc-text">Web-push的优势</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Web-Push-Notification-%E5%8E%9F%E7%90%86"><span class="toc-text">Web Push Notification 原理</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BC%80%E5%A7%8B"><span class="toc-text">开始</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%A6%96%E5%85%88%E7%9C%8B%E4%B8%8B%E6%95%88%E6%9E%9C%E5%9B%BE"><span class="toc-text">首先看下效果图</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%89%E8%A3%85%E6%8F%92%E4%BB%B6"><span class="toc-text">安装插件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%98%E7%BD%91%E6%B3%A8%E5%86%8C"><span class="toc-text">官网注册</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AE%BE%E7%BD%AE%E6%B6%88%E6%81%AF%E6%8E%A8%E9%80%81%E6%A0%BC%E5%BC%8F"><span class="toc-text">设置消息推送格式</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%BE%81%E6%B1%82%E7%94%A8%E6%88%B7%E6%98%AF%E5%90%A6%E8%AE%A2%E9%98%85%E6%B6%88%E6%81%AF"><span class="toc-text">征求用户是否订阅消息</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%B0%83%E6%95%B4%E8%AE%A2%E9%98%85%E6%88%90%E5%8A%9F%E5%90%8E%EF%BC%8C%E5%B0%8F%E9%93%83%E9%92%9F%E6%8C%89%E9%92%AE%E7%9A%84%E4%BD%8D%E7%BD%AE%E4%BB%A5%E5%8F%8A%E7%9B%B8%E5%85%B3%E4%BF%A1%E6%81%AF"><span class="toc-text">调整订阅成功后，小铃钟按钮的位置以及相关信息</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%AE%A2%E9%98%85%E6%88%90%E5%8A%9F%E5%90%8E%E6%AC%A2%E8%BF%8E%E8%87%B4%E8%BE%9E"><span class="toc-text">订阅成功后欢迎致辞</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%94%9F%E6%88%90%E7%9A%84%E6%95%B0%E6%8D%AE%E6%A0%BC%E5%BC%8F"><span class="toc-text">生成的数据格式</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%87%AA%E5%8A%A8%E6%8E%A8%E9%80%81%E6%99%AE%E9%80%9A%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88"><span class="toc-text">自动推送普通解决方案</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%87%AA%E5%8A%A8%E6%8E%A8%E5%8A%A8%E7%89%B9%E6%AE%8A%E5%AE%9E%E7%8E%B0%E6%96%B9%E6%A1%88"><span class="toc-text">自动推动特殊实现方案</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E7%BB%9F%E8%AE%A1"><span class="toc-text">数据统计</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BB%93%E6%9D%9F"><span class="toc-text">结束</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-history"></i><span>最近发布</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/posts/20200907161311-96f9.html" title="打造炫酷的Github个人页面"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://gcore.jsdelivr.net/gh/Yafine/cdn@3.5.0/images/0033.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="打造炫酷的Github个人页面"/></a><div class="content"><a class="title" href="/posts/20200907161311-96f9.html" title="打造炫酷的Github个人页面">打造炫酷的Github个人页面</a><time datetime="2020-09-07T08:13:11.000Z" title="发表于 2020-09-07 16:13:11">2020-09-07</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/20200708113758-b251.html" title="如何为没有目录的PDF电子书添加目录"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://gcore.jsdelivr.net/gh/Yafine/cdn@3.5.0/images/0032.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="如何为没有目录的PDF电子书添加目录"/></a><div class="content"><a class="title" href="/posts/20200708113758-b251.html" title="如何为没有目录的PDF电子书添加目录">如何为没有目录的PDF电子书添加目录</a><time datetime="2020-07-08T03:37:58.000Z" title="发表于 2020-07-08 11:37:58">2020-07-08</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/20200509105306-e925.html" title="为你的hexo博客添加导航页"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://gcore.jsdelivr.net/gh/Yafine/cdn@3.5.0/images/0061.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="为你的hexo博客添加导航页"/></a><div class="content"><a class="title" href="/posts/20200509105306-e925.html" title="为你的hexo博客添加导航页">为你的hexo博客添加导航页</a><time datetime="2020-05-09T02:53:06.000Z" title="发表于 2020-05-09 10:53:06">2020-05-09</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/20200426173435-ebb2.html" title="Hexo博客订阅文章通知功能"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://gcore.jsdelivr.net/gh/Yafine/cdn@3.5.0/images/0024.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Hexo博客订阅文章通知功能"/></a><div class="content"><a class="title" href="/posts/20200426173435-ebb2.html" title="Hexo博客订阅文章通知功能">Hexo博客订阅文章通知功能</a><time datetime="2020-04-26T09:34:35.000Z" title="发表于 2020-04-26 17:34:35">2020-04-26</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/20200426142402-12b4.html" title="Hexo+Github博客搭建之Matery主题个性化修改篇（二）"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://gcore.jsdelivr.net/gh/Yafine/cdn@3.5.0/images/0001.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Hexo+Github博客搭建之Matery主题个性化修改篇（二）"/></a><div class="content"><a class="title" href="/posts/20200426142402-12b4.html" title="Hexo+Github博客搭建之Matery主题个性化修改篇（二）">Hexo+Github博客搭建之Matery主题个性化修改篇（二）</a><time datetime="2020-04-26T06:24:02.000Z" title="发表于 2020-04-26 14:24:02">2020-04-26</time></div></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div id="workboard"><img class="workSituationImg boardsign" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://gcore.jsdelivr.net/gh/Yafine/img-repo/images/Yang%E5%B0%8F%E7%99%BD-%E5%8A%AA%E5%8A%9B%E6%90%AC%E7%A0%96%E4%B8%AD.svg" alt="距离月入26k也就还差一个大佬带我~" title="距离月入26k也就还差一个大佬带我~"/><div id="runtimeTextTip"></div></div><p id="ghbdages"><a class="github-badge" target="_blank" href="https://hexo.io/" style="margin-inline:5px" data-title="博客框架为Hexo_v5.4.0" title="博客框架为Hexo_v5.4.0"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://npm.elemecdn.com/anzhiyu-blog@2.1.5/img/badge/Frame-Hexo.svg" alt="博客框架为Hexo_v5.4.0"/></a><a class="github-badge" target="_blank" href="https://anheyu.com/" style="margin-inline:5px" data-title="本站使用AnZhiYu主题" title="本站使用AnZhiYu主题"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://npm.elemecdn.com/anzhiyu-theme-static@1.0.9/img/Theme-AnZhiYu-2E67D3.svg" alt="本站使用AnZhiYu主题"/></a></p></div><div id="footer-bar"><div class="footer-bar-links"><div class="footer-bar-left"><div id="footer-bar-tips"><div class="copyright">&copy;2018 - 2023 By <a class="footer-bar-link" href="/" title="Yafine" target="_blank">Yafine</a></div></div><div id="footer-type-tips"></div></div><div class="footer-bar-right"><a class="footer-bar-link" target="_blank" rel="noopener" href="https://github.com/anzhiyu-c/hexo-theme-anzhiyu" title="主题">主题</a></div></div></div></footer></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="sidebar-site-data site-data is-center"><a href="/archives/" title="archive"><div class="headline">文章</div><div class="length-num">33</div></a><a href="/tags/" title="tag"><div class="headline">标签</div><div class="length-num">15</div></a><a href="/categories/" title="category"><div class="headline">分类</div><div class="length-num">7</div></a></div><span class="sidebar-menu-item-title">功能</span><div class="sidebar-menu-item"><a class="darkmode_switchbutton menu-child" href="javascript:void(0);" title="显示模式"><i class="anzhiyufont anzhiyu-icon-circle-half-stroke"></i><span>显示模式</span></a></div><div class="back-menu-list-groups"><div class="back-menu-list-group"><div class="back-menu-list-title">网页</div><div class="back-menu-list"><a class="back-menu-item" target="_blank" rel="noopener" href="https://blog.anheyu.com/" title="博客"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/favicon.ico" alt="博客"/><span class="back-menu-item-text">博客</span></a></div></div><div class="back-menu-list-group"><div class="back-menu-list-title">项目</div><div class="back-menu-list"><a class="back-menu-item" target="_blank" rel="noopener" href="https://image.anheyu.com/" title="安知鱼图床"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://image.anheyu.com/favicon.ico" alt="安知鱼图床"/><span class="back-menu-item-text">安知鱼图床</span></a></div></div></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 文章</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/archives/"><i class="anzhiyufont anzhiyu-icon-box-archive faa-tada" style="font-size: 0.9em;"></i><span> 隧道</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/categories/"><i class="anzhiyufont anzhiyu-icon-shapes faa-tada" style="font-size: 0.9em;"></i><span> 分类</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/tags/"><i class="anzhiyufont anzhiyu-icon-tags faa-tada" style="font-size: 0.9em;"></i><span> 标签</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 关于</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/about/"><svg class="icon faa-tada" aria-hidden="true"><use xlink:href="#icon--cool"></use></svg><span> 关于本人</span></a></li><li><a class="site-page child faa-parent animated-hover" href="javascript:toRandomPost()"><i class="anzhiyufont anzhiyu-icon-shoe-prints1 faa-tada" style="font-size: 0.9em;"></i><span> 随便逛逛</span></a></li></ul></div></div><span class="sidebar-menu-item-title">标签</span><div class="card-tags"><div class="item-headline"></div><div class="card-tag-cloud"><a href="/tags/CSS3/" style="font-size: 0.88rem;">CSS3<sup>1</sup></a><a href="/tags/HTML/" style="font-size: 0.88rem;">HTML<sup>1</sup></a><a href="/tags/Hexo/" style="font-size: 0.88rem;">Hexo<sup>23</sup></a><a href="/tags/JavaScript/" style="font-size: 0.88rem;">JavaScript<sup>2</sup></a><a href="/tags/PWA/" style="font-size: 0.88rem;">PWA<sup>1</sup></a><a href="/tags/cdn/" style="font-size: 0.88rem;">cdn<sup>1</sup></a><a href="/tags/jsdelivr/" style="font-size: 0.88rem;">jsdelivr<sup>1</sup></a><a href="/tags/matery%E4%B8%BB%E9%A2%98/" style="font-size: 0.88rem;">matery主题<sup>10</sup></a><a href="/tags/nodejs/" style="font-size: 0.88rem;">nodejs<sup>1</sup></a><a href="/tags/%E5%9B%BE%E5%BA%8A%E6%90%AD%E5%BB%BA/" style="font-size: 0.88rem;">图床搭建<sup>3</sup></a><a href="/tags/%E5%B7%A5%E5%85%B7/" style="font-size: 0.88rem;">工具<sup>1</sup></a><a href="/tags/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/" style="font-size: 0.88rem;">开发工具<sup>1</sup></a><a href="/tags/%E6%8A%80%E5%B7%A7/" style="font-size: 0.88rem;">技巧<sup>2</sup></a><a href="/tags/%E6%95%88%E7%8E%87%E5%B7%A5%E5%85%B7/" style="font-size: 0.88rem;">效率工具<sup>1</sup></a><a href="/tags/%E6%B5%8F%E8%A7%88%E5%99%A8%E7%9F%A5%E8%AF%86/" style="font-size: 0.88rem;">浏览器知识<sup>1</sup></a></div></div><hr/></div></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="anzhiyufont anzhiyu-icon-book-open"></i></button><button id="translateLink" type="button" title="简繁转换">繁</button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="anzhiyufont anzhiyu-icon-circle-half-stroke"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="anzhiyufont anzhiyu-icon-arrows-left-right"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="anzhiyufont anzhiyu-icon-gear"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="anzhiyufont anzhiyu-icon-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="anzhiyufont anzhiyu-icon-xmark"></i></button></nav><div class="is-center" id="loading-database"><i class="anzhiyufont anzhiyu-icon-spinner anzhiyu-pulse-icon"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div></div></div><div id="search-mask"></div></div><div id="rightMenu"><div class="rightMenu-group rightMenu-small"><div class="rightMenu-item" id="menu-backward"><i class="anzhiyufont anzhiyu-icon-arrow-left"></i></div><div class="rightMenu-item" id="menu-forward"><i class="anzhiyufont anzhiyu-icon-arrow-right"></i></div><div class="rightMenu-item" id="menu-refresh"><i class="anzhiyufont anzhiyu-icon-arrow-rotate-right" style="font-size: 1rem;"></i></div><div class="rightMenu-item" id="menu-top"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i></div></div><div class="rightMenu-group rightMenu-line rightMenuPlugin"><div class="rightMenu-item" id="menu-copytext"><i class="anzhiyufont anzhiyu-icon-copy"></i><span>复制选中文本</span></div><div class="rightMenu-item" id="menu-pastetext"><i class="anzhiyufont anzhiyu-icon-paste"></i><span>粘贴文本</span></div><a class="rightMenu-item" id="menu-commenttext"><i class="anzhiyufont anzhiyu-icon-comment-medical"></i><span>引用到评论</span></a><div class="rightMenu-item" id="menu-newwindow"><i class="anzhiyufont anzhiyu-icon-window-restore"></i><span>新窗口打开</span></div><div class="rightMenu-item" id="menu-copylink"><i class="anzhiyufont anzhiyu-icon-link"></i><span>复制链接地址</span></div><div class="rightMenu-item" id="menu-copyimg"><i class="anzhiyufont anzhiyu-icon-images"></i><span>复制此图片</span></div><div class="rightMenu-item" id="menu-downloadimg"><i class="anzhiyufont anzhiyu-icon-download"></i><span>下载此图片</span></div><div class="rightMenu-item" id="menu-newwindowimg"><i class="anzhiyufont anzhiyu-icon-window-restore"></i><span>新窗口打开图片</span></div><div class="rightMenu-item" id="menu-search"><i class="anzhiyufont anzhiyu-icon-magnifying-glass"></i><span>站内搜索</span></div><div class="rightMenu-item" id="menu-searchBaidu"><i class="anzhiyufont anzhiyu-icon-magnifying-glass"></i><span>百度搜索</span></div><div class="rightMenu-item" id="menu-music-toggle"><i class="anzhiyufont anzhiyu-icon-play"></i><span>播放音乐</span></div><div class="rightMenu-item" id="menu-music-back"><i class="anzhiyufont anzhiyu-icon-backward"></i><span>切换到上一首</span></div><div class="rightMenu-item" id="menu-music-forward"><i class="anzhiyufont anzhiyu-icon-forward"></i><span>切换到下一首</span></div><div class="rightMenu-item" id="menu-music-playlist" onclick="window.open(&quot;https://y.qq.com/n/ryqq/playlist/2347340681&quot;, &quot;_blank&quot;);" style="display: none;"><i class="anzhiyufont anzhiyu-icon-radio"></i><span>查看所有歌曲</span></div><div class="rightMenu-item" id="menu-music-copyMusicName"><i class="anzhiyufont anzhiyu-icon-copy"></i><span>复制歌名</span></div></div><div class="rightMenu-group rightMenu-line rightMenuOther"><a class="rightMenu-item menu-link" id="menu-randomPost"><i class="anzhiyufont anzhiyu-icon-shuffle"></i><span>随便逛逛</span></a><a class="rightMenu-item menu-link" href="/categories/"><i class="anzhiyufont anzhiyu-icon-cube"></i><span>博客分类</span></a><a class="rightMenu-item menu-link" href="/tags/"><i class="anzhiyufont anzhiyu-icon-tags"></i><span>文章标签</span></a></div><div class="rightMenu-group rightMenu-line rightMenuOther"><a class="rightMenu-item" id="menu-copy" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-copy"></i><span>复制地址</span></a><a class="rightMenu-item" id="menu-commentBarrage" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-message"></i><span class="menu-commentBarrage-text">关闭热评</span></a><a class="rightMenu-item" id="menu-darkmode" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-circle-half-stroke"></i><span class="menu-darkmode-text">深色模式</span></a><a class="rightMenu-item" id="menu-translate" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-language"></i><span>轉為繁體</span></a></div></div><div id="rightmenu-mask"></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="https://cdn.cbd.int/@fancyapps/ui@5.0.28/dist/fancybox/fancybox.umd.js"></script><script src="https://cdn.cbd.int/instant.page@5.2.0/instantpage.js" type="module"></script><script src="https://cdn.cbd.int/vanilla-lazyload@17.8.5/dist/lazyload.iife.min.js"></script><script src="https://cdn.cbd.int/node-snackbar@0.1.16/dist/snackbar.min.js"></script><canvas id="universe"></canvas><script async src="https://npm.elemecdn.com/anzhiyu-theme-static@1.0.0/dark/dark.js"></script><script async src="/anzhiyu/random.js"></script><script async="async">(function () {
+  var grt = new Date("6/7/2018 00:00:00"); //设置网站上线时间
+  var now = new Date();
+  var dnum;
+  var hnum;
+  var mnum;
+  var snum;
+  var nowHour;
+
+  // 计算并更新天数、小时数、分钟数和秒数
+  function updateTime() {
+    now = new Date(); // 更新 now 的值
+    nowHour = now.getHours(); // 更新 nowHour 的值
+    var days = (now - grt) / 1000 / 60 / 60 / 24;
+    dnum = Math.floor(days);
+    var hours = (now - grt) / 1000 / 60 / 60 - 24 * dnum;
+    hnum = Math.floor(hours);
+    if (String(hnum).length == 1) {
+      hnum = "0" + hnum;
+    }
+    var minutes = (now - grt) / 1000 / 60 - 24 * 60 * dnum - 60 * hnum;
+    mnum = Math.floor(minutes);
+    if (String(mnum).length == 1) {
+      mnum = "0" + mnum;
+    }
+    var seconds = (now - grt) / 1000 - 24 * 60 * 60 * dnum - 60 * 60 * hnum - 60 * mnum;
+    snum = Math.round(seconds);
+    if (String(snum).length == 1) {
+      snum = "0" + snum;
+    }
+  }
+
+  // 更新网页中显示的网站运行时间
+  function updateHtml() {
+    const footer = document.getElementById("footer");
+    if (!footer) return
+    let currentTimeHtml = "";
+    if (nowHour < 18 && nowHour >= 9) {
+      // 如果是上班时间，默认就是"安知鱼-上班摸鱼中.svg"图片，不需要更改
+      currentTimeHtml = `本站居然运行了 ${dnum} 天<span id='runtime'> ${hnum} 小时 ${mnum} 分 ${snum} 秒 </span><i class='anzhiyufont anzhiyu-icon-heartbeat' style='color:red'></i>`;
+    } else {
+      // 如果是下班时间，插入"安知鱼-下班啦.svg"图片
+      let img = document.querySelector("#workboard .workSituationImg");
+      if (img != null) {
+        img.src = "https://gcore.jsdelivr.net/gh/Yafine/img-repo/images/Yang%E5%B0%8F%E7%99%BD-%E4%B8%8B%E7%8F%AD%E5%95%A6.svg";
+        img.title = "下班了就该开开心心的玩耍，嘿嘿~";
+        img.alt = "下班了就该开开心心的玩耍，嘿嘿~";
+      }
+
+      currentTimeHtml = `本站居然运行了 ${dnum} 天<span id='runtime'> ${hnum} 小时 ${mnum} 分 ${snum} 秒 </span><i class='anzhiyufont anzhiyu-icon-heartbeat' style='color:red'></i>`;
+    }
+
+    if (document.getElementById("runtimeTextTip")) {
+      document.getElementById("runtimeTextTip").innerHTML = currentTimeHtml;
+    }
+  }
+
+  setInterval(() => {
+    updateTime();
+    updateHtml();
+  }, 1000);
+})();</script><script src="/js/search/local-search.js"></script><div class="js-pjax"><input type="hidden" name="page-type" id="page-type" value="post"></div><script async data-pjax src="https://npm.elemecdn.com/anzhiyu-theme-static@1.0.1/bubble/bubble.js"></script><script>var visitorMail = "visitor@anheyu.com";
+</script><script async data-pjax src="https://cdn.cbd.int/anzhiyu-theme-static@1.0.0/waterfall/waterfall.js"></script><script src="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/qrcodejs/1.0.0/qrcode.min.js"></script><link rel="stylesheet" href="https://cdn.cbd.int/anzhiyu-theme-static@1.1.9/icon/ali_iconfont_css.css"><script async src="//at.alicdn.com/t/c/font_4143802_7mgeh62pxqi.js"></script><link rel="stylesheet" href="https://cdn.cbd.int/anzhiyu-theme-static@1.0.0/aplayer/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://cdn.cbd.int/anzhiyu-blog-static@1.0.1/js/APlayer.min.js"></script><script src="https://cdn.cbd.int/hexo-anzhiyu-music@1.0.1/assets/js/Meting2.min.js"></script><script src="https://cdn.cbd.int/pjax@0.2.8/pjax.min.js"></script><script>let pjaxSelectors = ["head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+var pjax = new Pjax({
+  elements: 'a:not([target="_blank"])',
+  selectors: pjaxSelectors,
+  cacheBust: false,
+  analytics: false,
+  scrollRestoration: false
+})
+
+document.addEventListener('pjax:send', function () {
+  // removeEventListener scroll 
+  anzhiyu.removeGlobalFnEvent('pjax')
+  anzhiyu.removeGlobalFnEvent('themeChange')
+
+  document.getElementById('rightside').classList.remove('rightside-show')
+  
+  if (window.aplayers) {
+    for (let i = 0; i < window.aplayers.length; i++) {
+      if (!window.aplayers[i].options.fixed) {
+        window.aplayers[i].destroy()
+      }
+    }
+  }
+
+  typeof typed === 'object' && typed.destroy()
+
+  //reset readmode
+  const $bodyClassList = document.body.classList
+  $bodyClassList.contains('read-mode') && $bodyClassList.remove('read-mode')
+})
+
+document.addEventListener('pjax:complete', function () {
+  window.refreshFn()
+
+  document.querySelectorAll('script[data-pjax]').forEach(item => {
+    const newScript = document.createElement('script')
+    const content = item.text || item.textContent || item.innerHTML || ""
+    Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+    newScript.appendChild(document.createTextNode(content))
+    item.parentNode.replaceChild(newScript, item)
+  })
+
+  GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
+
+  typeof panguInit === 'function' && panguInit()
+
+  // google analytics
+  typeof gtag === 'function' && gtag('config', '', {'page_path': window.location.pathname});
+
+  // baidu analytics
+  typeof _hmt === 'object' && _hmt.push(['_trackPageview',window.location.pathname]);
+
+  typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+
+  // prismjs
+  typeof Prism === 'object' && Prism.highlightAll()
+})
+
+document.addEventListener('pjax:error', e => {
+  if (e.request.status === 404) {
+    pjax.loadUrl('/404.html')
+  }
+})</script><script charset="UTF-8" src="https://cdn.cbd.int/anzhiyu-theme-static@1.1.5/accesskey/accesskey.js"></script></div><div id="popup-window"><div class="popup-window-title">通知</div><div class="popup-window-divider"></div><div class="popup-window-content"><div class="popup-tip">你好呀</div><div class="popup-link"><i class="anzhiyufont anzhiyu-icon-arrow-circle-right"></i></div></div></div></body></html>
